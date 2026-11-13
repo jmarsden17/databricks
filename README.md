@@ -15,3 +15,9 @@ These files contain TFL cycling data.
 The data is mostly good, but on the upper bound of hire time some periods run into the days and weeks, with the longest period being 49 days. 
 
 Not only is this an obvious outlier that seems hard to believe is real, the end date for this ride ends in April, long after the end of this data set.
+
+
+## Cleaning Rules
+- Removed journeys with a duration of less than one second (Removed 6).
+- Removed all journeys with hire times of over twenty four hours (Removed 841).
+- Dropped all duplicate rows (Removed 0).
