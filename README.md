@@ -20,7 +20,7 @@ Columns are named vaguely.
 ## Expectations
 - Rental ID must not be NULL (Fails on violation) - All entries need to have a unique ID. If an entry is ever added without one something is seriously wrong somewhere in the pipeline or schema and needs investigating immediately.
 - Bike number must not be NULL (Fails on violation) - Each bike has its own ID. Similarly, if this is not uploaded something is very wrong somewhere and needs to be investigated.
-- Total duration (ms) must not be NULL, and has to be more than one second and less than a day (Drops on violation) - NULL rows could suggest an issue with the bike, which is concerning but does not suggest a full system failure. Overly short or long journeys and often outliers and should not be counted in analysis, so they are dropped.
+- Total duration (ms) must not be NULL, and has to be more than one second and less than a day (Warns on violation) - NULL rows could suggest an issue with the bike, which is concerning but does not suggest a full system failure. Overly short or long journeys and often outliers and should be noted or investigated, but are not necessarily errors worth dropping. Since you might want to do analysis on these specific rows.
 - Start and end dates must not be NULL (Drops on violation) - Dates are attempted to be turned into timestamps before this check is carried out. If it fails it suggests a bike is uploading dates in the incorrect format, or not at all. Concerning, but not detrimental.
 
 ## Sanjay's Questions

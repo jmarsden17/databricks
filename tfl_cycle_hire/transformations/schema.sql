@@ -21,7 +21,7 @@ FROM STREAM read_files(
 CREATE OR REFRESH STREAMING TABLE silver (
   CONSTRAINT rental_id EXPECT (rental_id IS NOT NULL) ON VIOLATION FAIL UPDATE,
   CONSTRAINT bike_number EXPECT (bike_number IS NOT NULL) ON VIOLATION FAIL UPDATE,
-  CONSTRAINT total_duration_ms EXPECT (total_duration_ms IS NOT NULL AND 1000 < total_duration_ms AND total_duration_ms < 8.64e+7) ON VIOLATION DROP ROW,
+  CONSTRAINT total_duration_ms EXPECT (total_duration_ms IS NOT NULL AND 1000 < total_duration_ms AND total_duration_ms < 8.64e+7),
   CONSTRAINT start_timestamp EXPECT (start_timestamp IS NOT NULL) ON VIOLATION DROP ROW,
   CONSTRAINT end_timestamp EXPECT (end_timestamp IS NOT NULL) ON VIOLATION DROP ROW
 ) AS SELECT DISTINCT
