@@ -17,10 +17,11 @@ Not only is this an obvious outlier that seems hard to believe is real, the end 
 Columns are named vaguely.
 
 
-## Cleaning Rules
-- Removed journeys with a duration of less than one second (Removed 6).
-- Removed all journeys with hire times of over twenty four hours (Removed 841).
-- Dropped all duplicate rows (Removed 0).
+## Expectations
+- Rental ID must not be NULL (Fails on violation) - All entries need to have a unique ID. If an entry is ever added without one something is seriously wrong somewhere in the pipeline or schema and needs investigating immediately.
+- Bike number must not be NULL (Fails on violation) - Each bike has its own ID. Similarly, if this is not uploaded something is very wrong somewhere and needs to be investigated.
+- Total duration (ms) must not be NULL, and has to be more than one second and less than a day (Drops on violation) - NULL rows could suggest an issue with the bike, which is concerning but does not suggest a full system failure. Overly short or long journeys and often outliers and should not be counted in analysis, so they are dropped.
+- Start and end dates must not be NULL (Drops on violation) - Dates are attempted to be turned into timestamps before this check is carried out. If it fails it suggests a bike is uploading dates in the incorrect format, or not at all. Concerning, but not detrimental.
 
 ## Sanjay's Questions
 
