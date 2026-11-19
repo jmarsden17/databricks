@@ -10,7 +10,8 @@ AS SELECT
   `Bike number`           AS bike_number,
   `Bike model`            AS bike_model,
   `Total duration`        AS total_duration,
-  `Total duration (ms)`   AS total_duration_ms
+  `Total duration (ms)`   AS total_duration_ms,
+  _metadata.file_path     AS source_file
 FROM STREAM read_files(
   '/Volumes/workspace/tfl/raw/tfl_cycling_2026/',
   format => 'csv',

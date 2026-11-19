@@ -41,6 +41,11 @@ What would need to change to load next month's files?
 
 The filepaths in the bronze read would need to be changed for the next data set, as I set these manually. The rest of the pipeline however is just set to read the 'bronze' and 'silver' tables. Though this means that next months data could be added without changing anything else, it would overwrite what is already in the tables. So a new naming convention that includes the file dates would be needed to keep old data along with adding the new.
 
+## Scheduling
+1. Clean run - Everything worked smoothly, my script found 6 files not in the table and the pipeline ran with that data after the if/else returned 'True'.
+2. No new files run - After the data was in my tables I rerean the pipeline. The if/else returned 'False' as no new files were found. This is what I expected, and the pipeline did not run
+3. Failing run - I edited part of the file check script, so it could not find any files. I then fixed this and repaired the run, and it ran as expected.
+
 ## How to run
 
 1. Enter your file paths in the `02_bronze` notebook in the second cell.
