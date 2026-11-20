@@ -46,6 +46,25 @@ The filepaths in the bronze read would need to be changed for the next data set,
 2. No new files run - After the data was in my tables I rerean the pipeline. The if/else returned 'False' as no new files were found. This is what I expected, and the pipeline did not run
 3. Failing run - I edited part of the file check script, so it could not find any files. I then fixed this and repaired the run, and it ran as expected.
 
+## Performance
+Slowest query:
+SET use_cached_result = false;
+SELECT start_station_name, COUNT(*) AS total_hires FROM workspace.tfl_lakehouse.silver
+GROUP BY start_station_name, month(start_timestamp)
+ORDER BY total_hires DESC
+LIMIT 10;
+-- Slowest query: ~7s, 10.26MB, 1 file read, 0 pruned.
+
+Optimised query:
+SELECT station_name AS start_station_name, total_hires_started AS total_hires
+FROM workspace.tfl_lakehouse.gold_station_activity
+ORDER BY total_hires DESC
+LIMIT 10;
+-- Optimised by querying Gold table: 0.4s, 51.86KB, 1 file read, 0 pruned. 
+
+By reading the gold table which already contains similar data this query skips having to scan the entire hires table.
+
+
 ## How to run
 
 1. Enter your file paths in the `02_bronze` notebook in the second cell.
