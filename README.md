@@ -76,3 +76,4 @@ By reading the gold table which already contains similar data this query skips h
 4. Click 'Run All' for the `04_gold` notebook.
 
 5. You can explore the tables in `workspace.tfl`
+
