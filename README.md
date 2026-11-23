@@ -67,13 +67,9 @@ By reading the gold table which already contains similar data this query skips h
 
 ## How to run
 
-1. Enter your file paths in the `02_bronze` notebook in the second cell.
+1. Upload raw CSVs to /Volumes/workspace/tfl/raw/tfl_cycling_2026/
 
-2. Click 'Run All' for the `02_bronze` notebook.
+2. The pipeline reruns daily at 8AM, which will upload the new files automatically. To manually run the pipeline, run the `tfl_daily` job. 
 
-3. Click 'Run All' for the `03_silver` notebook.
-
-4. Click 'Run All' for the `04_gold` notebook.
-
-5. You can explore the tables in `workspace.tfl`
+3. Metrics can be found on the `tfl_cycle_hire` dashboard.
 
