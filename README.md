@@ -69,7 +69,12 @@ By reading the gold table which already contains similar data this query skips h
 
 1. Upload raw CSVs to /Volumes/workspace/tfl/raw/tfl_cycling_2026/
 
-2. The pipeline reruns daily at 8AM, which will upload the new files automatically. To manually run the pipeline, run the `tfl_daily` job. 
+2. Set up a pipeline with the `tfl_cycle_hire` folder.
 
-3. Metrics can be found on the `tfl_cycle_hire` dashboard.
+3. Set up a daily running job called `tfl_daily` with `tfl_cycle_hire` and `check_new_files`, so the pipeline only runs if there are new files.
+
+4. Set up an email alert if the job fails.
+
+5. After this, the pipeline should run daily at 8AM, and will upload the new files automatically. To manually run the pipeline, run the `tfl_daily` job. 
+
 
