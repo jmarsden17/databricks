@@ -128,6 +128,27 @@
           }
         ]
       }
+    },
+    {
+      "name": "8ae0de78",
+      "displayName": "bronze",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.tfl_lakehouse.bronze",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
     }
   ],
   "pages": [
@@ -333,29 +354,53 @@
               {
                 "name": "main_query",
                 "query": {
-                  "datasetName": "cc6211a6",
+                  "datasetName": "8ae0de78",
                   "fields": [
                     {
-                      "name": "measure(last_updated)",
-                      "expression": "MEASURE(`last_updated`)"
+                      "name": "max(ingested_at)",
+                      "expression": "MAX(`ingested_at`)"
                     }
                   ],
-                  "disaggregated": false
+                  "disaggregated": false,
+                  "orders": [
+                    {
+                      "direction": "DESC",
+                      "expression": "MAX(`ingested_at`)"
+                    }
+                  ]
                 }
               }
             ],
             "spec": {
               "frame": {
+                "showDescription": false,
                 "showTitle": true,
-                "title": "Data Last Updated"
+                "title": {
+                  "fields": [],
+                  "value": "Data Last Updated"
+                }
               },
               "version": 2,
               "widgetType": "table",
               "encodings": {
                 "columns": [
                   {
-                    "fieldName": "measure(last_updated)",
-                    "displayName": "Last Data Date"
+                    "fieldName": "max(ingested_at)",
+                    "displayName": "Last updated at:",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "MAX"
+                      }
+                    }
+                  }
+                ],
+                "rowOrder": [
+                  {
+                    "by": "column-reversed",
+                    "field": {
+                      "index": 0
+                    }
                   }
                 ]
               },
